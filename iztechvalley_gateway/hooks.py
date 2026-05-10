@@ -247,3 +247,14 @@ app_license = "mit"
 # List of apps whose translatable strings should be excluded from this app's translations.
 # ignore_translatable_strings_from = []
 
+
+
+# -----------------------------------------------------------------------------
+# Front Door: redirect users to /me site picker after login
+# Guarded by site name in the function itself.
+# -----------------------------------------------------------------------------
+on_session_creation = "iztechvalley_gateway.auth.session.on_session_creation"
+
+
+# Include front_door styles on web pages (notably /me)
+web_include_css = "/assets/iztechvalley_gateway/css/front_door.css"
