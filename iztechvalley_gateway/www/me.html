@@ -13,10 +13,13 @@
 	{% if tenant_sites %}
 	<div class="tenant-grid">
 		{% for site in tenant_sites %}
-		<a href="//{{ site.domain }}/login" class="tenant-tile" rel="noopener">
-			<div class="tenant-tile-name">{{ site.site_name }}</div>
-			<div class="tenant-tile-domain">{{ site.domain }}</div>
-		</a>
+		<form action="//{{ site.domain }}/sso_login" method="POST" target="_self" class="tenant-tile-form">
+			<input type="hidden" name="sso_token" value='{{ site.sso_token | forceescape }}'>
+			<button type="submit" class="tenant-tile" style="background: none; border: none; width: 100%; cursor: pointer; font-family: inherit; text-align: left; padding: 1.5rem;">
+				<div class="tenant-tile-name">{{ site.site_name }}</div>
+				<div class="tenant-tile-domain">{{ site.domain }}</div>
+			</button>
+		</form>
 		{% endfor %}
 	</div>
 	{% else %}

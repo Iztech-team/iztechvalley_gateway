@@ -144,7 +144,11 @@ app_license = "mit"
 # 		"on_trash": "method"
 # 	}
 # }
-
+doc_events = {
+    "User": {
+        "after_insert": "iztechvalley_gateway.hooks_backup.user_hooks.after_insert_user"
+    }
+}
 # Scheduled Tasks
 # ---------------
 
@@ -258,3 +262,6 @@ on_session_creation = "iztechvalley_gateway.auth.session.on_session_creation"
 
 # Include front_door styles on web pages (notably /me)
 web_include_css = "/assets/iztechvalley_gateway/css/front_door.css"
+
+# SSO: Validate token before each request
+#before_app_request = "iztechvalley_gateway.auth.sso.validate_sso_token"
