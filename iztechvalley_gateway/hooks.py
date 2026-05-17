@@ -146,7 +146,11 @@ app_license = "mit"
 # }
 doc_events = {
     "User": {
-        "after_insert": "iztechvalley_gateway.hooks_backup.user_hooks.after_insert_user"
+        "after_insert": "iztechvalley_gateway.hooks_backup.user_hooks.after_insert_user",
+        "on_update": "iztechvalley_gateway.hooks_backup.user_hooks.on_update_user",
+        "before_delete": "iztechvalley_gateway.hooks_backup.user_hooks.before_delete_user",
+        "on_trash": "iztechvalley_gateway.hooks_backup.user_hooks.on_trash_user",
+        "validate": "iztechvalley_gateway.hooks_backup.user_hooks.validate_user"
     }
 }
 # Scheduled Tasks
@@ -265,3 +269,10 @@ web_include_css = "/assets/iztechvalley_gateway/css/front_door.css"
 
 # SSO: Validate token before each request
 #before_app_request = "iztechvalley_gateway.auth.sso.validate_sso_token"
+csrf_exempted_paths = [
+    "api/method/iztechvalley_gateway.api.user_sync.sync_user_from_tenant"
+]
+
+system_settings = {
+    "allow_guest_to_access_user_api": 1
+}
