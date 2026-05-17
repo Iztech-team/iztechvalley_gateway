@@ -1,6 +1,0 @@
-app_name = "iztechvalley_gateway"
-app_title = "Iztechvalley Gateway"
-app_publisher = "Test"
-app_description = "Test"
-app_email = "test@test.com"
-app_license = "mit"
