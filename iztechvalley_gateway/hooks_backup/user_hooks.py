@@ -23,7 +23,8 @@ def sync_to_front_door(doc, action):
     tenant_domain = frappe.local.site
     
     try:
-        front_door_url = "http://login.iztechvalley.local/api/method/iztechvalley_gateway.api.user_sync.sync_user_from_tenant"
+        front_door_domain = frappe.get_site_config().get("front_door_domain", "login.iztechvalley.local")
+        front_door_url = f"http://{front_door_domain}/api/method/iztechvalley_gateway.api.user_sync.sync_user_from_tenant"
         response = requests.post(
             front_door_url,
             json={"user_data": user_data, "tenant_domain": tenant_domain},

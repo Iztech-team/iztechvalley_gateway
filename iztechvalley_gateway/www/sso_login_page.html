@@ -101,7 +101,9 @@
                 messageDiv.classList.add('alert-success');
                 messageDiv.style.display = 'block';
                 setTimeout(function() {
-                    window.location.href = '//' + site.domain + '/sso_login?usr=' + encodeURIComponent(usr) + '&pwd=' + encodeURIComponent(pwd);
+                    console.log('Site object:', site);
+                    console.log('Token:', site.sso_token);
+                    window.location.href = '//' + site.domain + '/sso_login?token=' + encodeURIComponent(site.sso_token);
                 }, 500);
             } else if (data.message && data.message.length > 1) {
                 sessionStorage.setItem('accessible_sites', JSON.stringify(data.message));

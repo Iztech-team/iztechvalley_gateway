@@ -276,3 +276,5 @@ csrf_exempted_paths = [
 system_settings = {
     "allow_guest_to_access_user_api": 1
 }
+# Installation
+after_install = "iztechvalley_gateway.install.after_install"

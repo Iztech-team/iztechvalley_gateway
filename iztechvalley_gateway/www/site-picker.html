@@ -65,7 +65,7 @@
             <div class="site-domain">${site.domain}</div>
         `;
         card.addEventListener('click', () => {
-            window.location.href = `//${site.domain}/sso_login?usr=${encodeURIComponent(credentials.usr)}&pwd=${encodeURIComponent(credentials.pwd)}`;
+            window.location.href = `//${site.domain}/sso_login?token=${encodeURIComponent(site.sso_token)}`;
         });
         container.appendChild(card);
     });

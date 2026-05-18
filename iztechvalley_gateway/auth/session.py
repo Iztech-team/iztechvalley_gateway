@@ -1,7 +1,7 @@
 import frappe
 from urllib.parse import quote
 
-FRONT_DOOR_SITE = "login.iztechvalley.local"
+FRONT_DOOR_SITE = frappe.get_site_config().get("front_door_domain", "login.iztechvalley.local")
 
 
 def on_session_creation(login_manager=None):

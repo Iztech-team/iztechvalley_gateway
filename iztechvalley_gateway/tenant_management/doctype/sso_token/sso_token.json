@@ -1,46 +1,55 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "field:site_name",
- "creation": "2026-05-18 11:04:32.170232",
+ "autoname": "field:token",
+ "creation": "2026-05-18 10:00:00.000000",
  "doctype": "DocType",
- "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "site_name",
-  "domain",
-  "is_active"
+  "token",
+  "user",
+  "allowed_sites",
+  "expires_at",
+  "used"
  ],
  "fields": [
   {
-   "fieldname": "site_name",
+   "fieldname": "token",
    "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Site Name",
+   "label": "Token",
    "reqd": 1,
    "unique": 1
   },
   {
-   "fieldname": "domain",
+   "fieldname": "user",
    "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Domain",
+   "label": "User",
    "reqd": 1
   },
   {
-   "default": "1",
-   "fieldname": "is_active",
+   "fieldname": "allowed_sites",
+   "fieldtype": "Text",
+   "label": "Allowed Sites"
+  },
+  {
+   "fieldname": "expires_at",
+   "fieldtype": "Datetime",
+   "label": "Expires At",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "used",
    "fieldtype": "Check",
-   "label": "Is Active"
+   "label": "Used"
   }
  ],
- "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-05-18 11:04:32.170232",
+ "modified": "2026-05-18 10:00:00.000000",
  "modified_by": "Administrator",
  "module": "Tenant Management",
- "name": "Tenant Site",
+ "name": "SSO Token",
  "owner": "Administrator",
  "permissions": [
   {
@@ -56,9 +65,8 @@
    "write": 1
   }
  ],
- "row_format": "Dynamic",
- "rows_threshold_for_grid_search": 20,
- "sort_field": "creation",
+ "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "track_changes": 1
 }
