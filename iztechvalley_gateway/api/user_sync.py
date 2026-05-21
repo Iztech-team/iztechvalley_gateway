@@ -23,16 +23,23 @@ def sync_user_from_tenant(user_data, tenant_domain):
     if not email:
         return {"status": "error", "message": "Email is required"}
     
-    # Handle DELETE action
+    # Handle DELETE action - فقط حذف الصلاحية، وليس المستخدم بالكامل
     if action == "delete":
-        # Delete user from Front Door
-        if frappe.db.exists("User", email):
-            frappe.delete_doc("User", email, force=True)
-            frappe.db.commit()
-        # Delete access records
-        frappe.db.delete("User Tenant Access", {"user": email})
+        # حذف access record الخاص بهذا المستخدم وهذا الموقع فقط
+        frappe.db.delete("User Tenant Access", {"user": email, "tenant_site": tenant_site})
         frappe.db.commit()
-        return {"status": "success", "message": f"User {email} deleted from Front Door"}
+        
+        # تحقق مما إذا كان المستخدم لا يزال لديه صلاحيات لمواقع أخرى
+        remaining_access = frappe.db.count("User Tenant Access", {"user": email})
+        
+        if remaining_access == 0:
+            # إذا لم يعد لديه أي صلاحيات، احذف المستخدم بالكامل
+            if frappe.db.exists("User", email):
+                frappe.delete_doc("User", email, force=True)
+                frappe.db.commit()
+            return {"status": "success", "message": f"User {email} deleted from Front Door (no remaining access)"}
+        else:
+            return {"status": "success", "message": f"Access removed for {email} on {tenant_site}. User still has access to {remaining_access} other site(s)"}
     
     # Handle INSERT or UPDATE
     if not frappe.db.exists("User", email):
