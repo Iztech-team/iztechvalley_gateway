@@ -74,7 +74,8 @@ def verify_user_credentials(usr, pwd):
     for site in all_sites:
         try:
             # Try to login to this tenant
-            login_url = f"http://{site['domain']}/api/method/login"
+            scheme = frappe.conf.get("gateway_scheme", "https")
+            login_url = f"{scheme}://{site['domain']}/api/method/login"
             response = requests.post(
                 login_url, 
                 data={"usr": usr, "pwd": pwd}, 

@@ -15,7 +15,8 @@ def get_context(context):
     try:
         # الاتصال بـ Gateway للتحقق من صحة الـ token
         gateway_domain = frappe.get_site_config().get("front_door_domain", "login.iztechvalley.local")
-        gateway_url = f"http://{gateway_domain}"
+        scheme = frappe.conf.get("gateway_scheme", "https")
+        gateway_url = f"{scheme}://{gateway_domain}"
         tenant_site = frappe.local.site
         
         response = requests.post(
